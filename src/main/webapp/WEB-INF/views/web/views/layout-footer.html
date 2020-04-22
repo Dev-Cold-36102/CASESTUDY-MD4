@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:fragment="head">
+    <title>Dev Cold Shop</title>
+    <link href='../properties/images/favicon.png' rel="shortcut icon" type='image/png'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="../properties/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../properties/js/jquery1.min.js"></script>
+    <!-- start menu -->
+    <link href="../properties/css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="../properties/js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <script src="../properties/js/jquery.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
+    <!-- dropdown -->
+    <script src="../properties/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet"
+          href="../properties/FormSignInUp/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+
+    <!-- Main css -->
+    <link href="../properties/css/form.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <link rel="stylesheet" href="../properties/css/fwslider.css" media="all">
+    <script src="../properties/js/jquery-ui.min.js"></script>
+    <script src="../properties/js/css3-mediaqueries.js"></script>
+    <script src="../properties/js/fwslider.js"></script>
+    <link rel="stylesheet" href="../properties/FormSignInUp/css/styleLogin.css">
+    <link rel="stylesheet" href="../properties/css/etalage.css">
+    <script src="../properties/js/jquery.etalage.min.js"></script>
+    <script type="text/javascript" id="sourcecode">
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 360,
+                thumb_image_height: 360,
+                source_image_width: 900,
+                source_image_height: 900,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--    <link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <script>
+        // const apiBaseUrl = 'http://localhost:8080';
+
+        function search_product() {
+            let keySearch = document.getElementById("search").value;
+            console.log(keySearch)
+            $.ajax(`${apiBaseUrl}/search/` + keySearch)
+                .done(function (result) {
+                    console.log(result)
+                    $("#search").autocomplete({
+                        source: result
+                    });
+
+                })
+                .fail(function (error) {
+                    console.log(error);
+                });
+        };
+
+    </script>
+</head>
+<body>
+
+
+<!--<div >-->
+<div th:fragment="nav" class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+                <select tabindex="4" class="dropdown">
+                    <option class="label" value="">Language :</option>
+                    <option value="1">English</option>
+                    <option value="2">French</option>
+                    <option value="3">German</option>
+                </select>
+            </div>
+            <div class="box1">
+                <select tabindex="4" class="dropdown">
+                    <option class="label" value="">Currency :</option>
+                    <option value="1">$ Dollar</option>
+                    <option value="2">€ Euro</option>
+                </select>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!--            <div >-->
+        <div th:if="${user==null}" class="cssmenu">
+            <ul>
+                <li><a href="/checkout">Wishlist</a></li>
+                |
+                <li><a href="/checkout">Checkout</a></li>
+                |
+                <li><a href="/login">Log In</a></li>
+                |
+                <li><a href="/signup">Sign Up</a></li>
+            </ul>
+        </div>
+        <!--            </div>-->
+
+        <div th:if="${user!=null}" class="cssmenu">
+            <!--                <div>-->
+            <ul>
+                <li>
+                    <a href="/change-infor">Change info</a>
+                </li>
+                |
+                <li>
+                    <a href="/change-password">Change password</a>
+                </li>
+                |
+                <li><a href="/checkout">Checkout</a></li>
+                |
+                <li><a href="/logout">Log Out</a></li>
+                |
+                <li><a sec:authentication="principal.username" href="/"></a></li>
+            </ul>
+            <!--                </div>-->
+        </div>
+
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div th:fragment="menu" class="header-bottom">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <div class="logo">
+                <a href="/"><img src="../properties/images/logo.png" alt=""/></a>
+            </div>
+
+            <div class="menu" th:if="${user!='[ROLE_ADMIN]'}">
+                <ul class="megamenu skyblue">
+                    <li class="active grid"><a href="/">Home</a></li>
+                    <li><a class="color4" href="#">women</a>
+                        <div class="megapanel">
+                            <div class="row">
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Contact Lenses</h4>
+                                        <ul>
+                                            <li><a href="womens.html">Daily-wear soft lenses</a></li>
+                                            <li><a href="womens.html">Extended-wear</a></li>
+                                            <li><a href="womens.html">Lorem ipsum </a></li>
+                                            <li><a href="womens.html">Planned replacement</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Sun Glasses</h4>
+                                        <ul>
+                                            <li><a href="womens.html">Heart-Shaped</a></li>
+                                            <li><a href="womens.html">Square-Shaped</a></li>
+                                            <li><a href="womens.html">Round-Shaped</a></li>
+                                            <li><a href="womens.html">Oval-Shaped</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Eye Glasses</h4>
+                                        <ul>
+                                            <li><a href="womens.html">Anti Reflective</a></li>
+                                            <li><a href="womens.html">Aspheric</a></li>
+                                            <li><a href="womens.html">Bifocal</a></li>
+                                            <li><a href="womens.html">Hi-index</a></li>
+                                            <li><a href="womens.html">Progressive</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a class="color5" href="#">Men</a>
+                        <div class="megapanel">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Contact Lenses</h4>
+                                    <ul>
+                                        <li><a href="mens.html">Daily-wear soft lenses</a></li>
+                                        <li><a href="mens.html">Extended-wear</a></li>
+                                        <li><a href="mens.html">Lorem ipsum </a></li>
+                                        <li><a href="mens.html">Planned replacement</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Sun Glasses</h4>
+                                    <ul>
+                                        <li><a href="mens.html">Heart-Shaped</a></li>
+                                        <li><a href="mens.html">Square-Shaped</a></li>
+                                        <li><a href="mens.html">Round-Shaped</a></li>
+                                        <li><a href="mens.html">Oval-Shaped</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Eye Glasses</h4>
+                                    <ul>
+                                        <li><a href="mens.html">Anti Reflective</a></li>
+                                        <li><a href="mens.html">Aspheric</a></li>
+                                        <li><a href="mens.html">Bifocal</a></li>
+                                        <li><a href="mens.html">Hi-index</a></li>
+                                        <li><a href="mens.html">Progressive</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a class="color6" href="other.html">Other</a></li>
+                    <li><a class="color7" href="other.html">Purchase</a></li>
+                </ul>
+            </div>
+
+            <div class="menu" th:if="${user=='[ROLE_ADMIN]'}">
+                <ul class="megamenu skyblue">
+                    <li class="active grid"><a href="/">Home</a></li>
+                    <li><a class="color4" href="/admin/create-product">Add product</a></li>
+                    <li><a class="color5" href="/admin/user-manage">User manage</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="header-bottom-right">
+            <div class="search ui-widget">
+                <form action="/search-product" method="post">
+                    <input autocomplete="false" type="text" id="search" placeholder="Search" class="textbox" oninput="search_product()"
+                           name="key-search">
+                    <input type="submit" id="submit">
+                </form>
+                <div id="response"></div>
+            </div>
+            <div class="tag-list">
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c1" href="#"> </a>
+                        <ul class="sub-icon1 list">
+                            <li><p>Lorem ipsum dolor sit amet, consectetuer <a href="">adipiscing elit, sed diam</a></p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c2" th:href="@{/checkout}"> </a>
+                        <!--                        <ul class="sub-icon1 list">-->
+                        <!--                            <li><h3>No Products</h3><a href=""></a></li>-->
+                        <!--                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>-->
+                        <!--                        </ul>-->
+                    </li>
+                </ul>
+                <ul class="last">
+                    <li><a th:href="@{/checkout}">
+                        <div id="cart" th:text="'CART('+${amountCart}+')'"></div>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<footer th:fragment="footer">
+    <div class="footer">
+        <div class="footer-top">
+            <div class="wrap">
+                <div class="section group example">
+                    <div class="col_1_of_2 span_1_of_2">
+                        <ul class="f-list">
+                            <li><img src="../properties/images/2.png"><span class="f-text">Free Shipping on orders over $ 100</span>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_2 span_1_of_2">
+                        <ul class="f-list">
+                            <li><img src="../properties/images/3.png"><span class="f-text">Call us! toll free-222-555-6666 </span>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div class="wrap">
+                <div class="section group example">
+                    <div class="col_1_of_f_1 span_1_of_f_1">
+                        <div class="section group example">
+                            <div class="col_1_of_f_2 span_1_of_f_2">
+                                <h3>Facebook</h3>
+                                <script>(function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+                                <div class="like_box">
+                                    <div class="fb-like-box" data-href="http://www.facebook.com/w3layouts"
+                                         data-colorscheme="light" data-show-faces="true" data-header="true"
+                                         data-stream="false" data-show-border="true"></div>
+                                </div>
+                            </div>
+                            <div class="col_1_of_f_2 span_1_of_f_2">
+                                <h3>From Twitter</h3>
+                                <div class="recent-tweet">
+                                    <div class="recent-tweet-icon">
+                                        <span> </span>
+                                    </div>
+                                    <div class="recent-tweet-info">
+                                        <p>Ds which don't look even slightly believable. If you are <a href="#">going to
+                                            use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="recent-tweet">
+                                    <div class="recent-tweet-icon">
+                                        <span> </span>
+                                    </div>
+                                    <div class="recent-tweet-info">
+                                        <p>Ds which don't look even slightly believable. If you are <a href="#">going to
+                                            use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="col_1_of_f_1 span_1_of_f_1">
+                        <div class="section group example">
+                            <div class="col_1_of_f_2 span_1_of_f_2">
+                                <h3>Information</h3>
+                                <ul class="f-list1">
+                                    <li><a href="#">Duis autem vel eum iriure </a></li>
+                                    <li><a href="#">anteposuerit litterarum formas </a></li>
+                                    <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                                    <li><a href="#">Duis autem vel eum iriure </a></li>
+                                    <li><a href="#">anteposuerit litterarum formas </a></li>
+                                    <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                                </ul>
+                            </div>
+                            <div class="col_1_of_f_2 span_1_of_f_2">
+                                <h3>Contact us</h3>
+                                <div class="company_address">
+                                    <p>500 Lorem Ipsum Dolor Sit,</p>
+                                    <p>22-56-2-9 Sit Amet, Lorem,</p>
+                                    <p>USA</p>
+                                    <p>Phone:(00) 222 666 444</p>
+                                    <p>Fax: (000) 000 00 00 0</p>
+                                    <p>Email: <span>mail[at]leoshop.com</span></p>
+
+                                </div>
+                                <div class="social-media">
+                                    <ul>
+                                        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Google"><a
+                                                href="#" target="_blank"> </a></span></li>
+                                        <li><span class="simptip-position-bottom simptip-movable"
+                                                  data-tooltip="Linked in"><a href="#" target="_blank"> </a> </span>
+                                        </li>
+                                        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Rss"><a
+                                                href="#" target="_blank"> </a></span></li>
+                                        <li><span class="simptip-position-bottom simptip-movable"
+                                                  data-tooltip="Facebook"><a href="#" target="_blank"> </a></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="copy">
+                    <p>© 2014 Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a></p>
+                </div>
+                <div class="f-list2">
+                    <ul>
+                        <li class="active"><a href="about.html">About Us</a></li>
+                        |
+                        <li><a href="delivery.html">Delivery & Returns</a></li>
+                        |
+                        <li><a href="delivery.html">Terms & Conditions</a></li>
+                        |
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

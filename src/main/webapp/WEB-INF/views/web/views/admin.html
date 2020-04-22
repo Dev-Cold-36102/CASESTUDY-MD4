@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:replace="layout-footer::head"></head>
+<body>
+
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<!-- start slider -->
+<!--/slider -->
+<!--<div class="main">-->
+<div class="wrap">
+
+    <h2 class="head">Featured Products</h2>
+    <div class="top-box">
+        <div class="col_1_of_3 span_1_of_3" th:each="product,iterStat :${products}">
+
+            <div class="inner_content clearfix">
+                <div class="product_image">
+                    <a th:href="@{'/product-detail/' + ${product.id}}">
+                        <img th:src="${product.getImage()}" th:title="${product.getName()}"/>
+                    </a>
+                </div>
+                <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                <div class="price">
+                    <div class="cart-left">
+                        <p class="title" th:text="${product.getName()}"></p>
+                        <div class="price1">
+                            <span class="actual" th:text="${product.getPrice()}"></span>
+                            <span class="actual">$</span>
+                            <a th:href="@{'/admin/edit-product/'+${product.getId()}}"
+                               style="padding-left: 10px">EDIT</a>
+                            <!--                            <a th:href="@{'/admin/delete-product/'+${product.getId()}}" style="padding-left: 10px">DELETE</a>-->
+                            <a style="padding-left: 10px" th:id="${product.id}" onclick="doDelete(this.id)">DELETE</a>
+                        </div>
+                    </div>
+                    <a class="cart-right" onclick="addToCart(this.id)" th:id="${product.getId()}"></a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <a th:href="@{/}">
+            <button type="button" class="btn btn-primary btn-sm">PAGE 1</button>
+        </a>
+        <a th:href="@{/home/1}">
+            <button type="button" class="btn btn-success btn-sm">PAGE 2</button>
+        </a>
+        <a th:href="@{/home/2}">
+            <button type="button" class="btn btn-danger btn-sm">PAGE 3</button>
+        </a>
+        <a th:href="@{/home/3}">
+            <button type="button" class="btn btn-secondary btn-sm">PAGE 4</button>
+        </a>
+        <a th:href="@{/home/4}">
+            <button type="button" class="btn btn-warning btn-sm">PAGE 5</button>
+        </a>
+        <a th:href="@{/home/5}">
+            <button type="button" class="btn btn-info btn-sm">PAGE 6</button>
+        </a>
+
+    </div>
+    <h2 class="head">New Products</h2>
+    <div class="section group">
+        <div class="col_1_of_3 span_1_of_3" th:each="newProduct,iterStat :${newProducts}">
+
+            <div class="inner_content clearfix">
+                <div class="prproduct_image">
+                    <a th:href="@{'/product-detail/'+${newProduct.id}}">
+                        <img th:src="${newProduct.getImage()}" th:title="${newProduct.getName()}"/>
+                    </a>
+                </div>
+                <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                <div class="price">
+                    <div class="cart-left">
+                        <p class="title" th:text="${newProduct.getName()}"></p>
+                        <div class="price1">
+                            <span class="actual" th:text="${newProduct.getPrice()}"></span>
+                            <span class="actual">$</span>
+                            <a href="" style="padding-left: 10px">EDIT</a>
+                            <a href="" style="padding-left: 10px">DELETE</a>
+                        </div>
+                    </div>
+                    <a class="cart-right" onclick="addToCart(this.id)" th:id="${newProduct.getId()}"></a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--    </div>-->
+</div>
+<div class="clear"></div>
+<footer th:replace="layout-footer::footer"></footer>
+</body>
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function addToCart(id) {
+        $.ajax(`${apiBaseUrl}/addtocart/${id}`)
+            .done(function (result) {
+                document.getElementById('cart').innerHTML = "CART(" + result + ")";
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+    function doDelete(id) {
+        if (confirm("Are you sure to delete this product?")) {
+            {
+                $.ajax(`${apiBaseUrl}/admin/delete/${id}`)
+                    .done(function (result) {
+                        console.log("sfds");
+                            window.location.reload(); // then reload the page.(3)
+                    })
+                    .fail(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    };
+
+</script>
+</html>

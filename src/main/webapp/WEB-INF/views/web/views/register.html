@@ -1,0 +1,98 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout-footer::head"></head>
+<body>
+<div class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+                <select tabindex="4" class="dropdown">
+                    <option value="" class="label" >Language :</option>
+                    <option value="1">English</option>
+                    <option value="2">French</option>
+                    <option value="3">German</option>
+                </select>
+            </div>
+            <div class="box1">
+                <select tabindex="4" class="dropdown">
+                    <option value="" class="label">Currency :</option>
+                    <option value="1">$ Dollar</option>
+                    <option value="2">€ Euro</option>
+                </select>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cssmenu">
+            <ul>
+                <li class="active"><a href="login.html">Account</a></li>
+                |
+                <li><a href="checkout.html">Wishlist</a></li>
+                |
+                <li><a href="checkout.html">Checkout</a></li>
+                |
+                <li><a href="login.html">Log In</a></li>
+                |
+                <li><a href="register.html">Sign Up</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div th:insert="layout-footer::menu"></div>
+<div class="register_account">
+    <div class="wrap">
+<!--        <form>-->
+            <div class="clear"></div>
+            <section class="signup">
+                <div class="container">
+                    <div class="signup-content">
+                        <div class="signup-form">
+                            <h2 class="form-title">Sign up</h2>
+                            <p th:text="${message}"></p>
+                            <form method="post" class="register-form" id="register-form" action="/signup" th:object="${user}">
+                                <div class="form-group">
+                                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error name</p>
+                                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error pass</p>
+<!--                                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>-->
+                                    <input type="text" name="username" id="name" th:value="${username}" placeholder="Your Name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                    <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                    <input type="password" name="password" id="password"  th:value="${password}" placeholder="Password"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="repassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                                    <input type="password" name="repassword" id="repassword" placeholder="Repeat your password"/>
+                                    <p th:text="${messageRePass}"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                    <label for="agree-term" class="label-agree-term">By submit, I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                </div>
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="signup-image">
+                            <figure><img src="../properties/FormSignInUp/images/signup-image.jpg" alt="sing up image"></figure>
+                            <a href="/login" class="signup-image-link">I am already member</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!--        </form>-->
+    </div>
+</div>
+<footer th:replace="layout-footer::footer"></footer></body>
+</html>

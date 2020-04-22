@@ -1,0 +1,102 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout-footer::head"></head>
+<body>
+<div class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+                <select tabindex="4" class="dropdown">
+                    <option class="label" value="">Language :</option>
+                    <option value="1">English</option>
+                    <option value="2">French</option>
+                    <option value="3">German</option>
+                </select>
+            </div>
+            <div class="box1">
+                <select tabindex="4" class="dropdown">
+                    <option class="label" value="">Currency :</option>
+                    <option value="1">$ Dollar</option>
+                    <option value="2">€ Euro</option>
+                </select>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cssmenu">
+            <ul>
+                <li class="active"><a href="login.html">Account</a></li>
+                |
+                <li><a href="checkout.html">Wishlist</a></li>
+                |
+                <li><a href="checkout.html">Checkout</a></li>
+                |
+                <li><a href="login.html">Log In</a></li>
+                |
+                <li><a href="register.html">Sign Up</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div th:insert="layout-footer::menu"></div>
+<div class="login">
+    <!--	<div class="wrap">-->
+
+
+    <!--		<div class="main">-->
+    <!-- Sing in  Form -->
+    <section class="sign-in">
+        <div class="container">
+            <div class="signin-content">
+                <div class="signin-image">
+                    <figure><img src="../properties/FormSignInUp/images/signin-image.jpg" alt="sing up image"></figure>
+                    <a href="/signup" class="signup-image-link">Create an account</a>
+                </div>
+
+                <div class="signin-form">
+                    <div class="text-center"> <p style="color: #00AEFF" th:text="${message}"></p></div>
+                    <h2 class="form-title">Sign in</h2>
+                    <form method="post" action="/login" class="register-form" id="login-form">
+                        <div class="form-group">
+                            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="username" id="your_name" th:value="${name}"
+                                   placeholder="Your Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="password" id="your_pass" th:value="${password}"
+                                   placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term"/>
+                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember
+                                me</label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                        </div>
+                    </form>
+                    <div class="social-login">
+                        <span class="social-label">Or login with</span>
+                        <ul class="socials">
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="clear"></div>
+</div>
+
+<footer th:replace="layout-footer::footer"></footer>
+</body>
+</html>

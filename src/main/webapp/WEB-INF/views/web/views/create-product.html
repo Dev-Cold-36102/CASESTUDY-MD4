@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:replace="layout-footer::head"></head>
+<body>
+
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<br>
+<br>
+<br>
+<!-- start slider -->
+<div style="background-color: #87D8EB">
+    <div class="wrap">
+        <p th:text="${message}"></p><br>
+        <form action="/admin/create-product" method="post" th:object="${productForm}" enctype="multipart/form-data">
+            <div class="form-group">
+                <p style="color: #ff5d56">Name product
+                <p>
+                    <input type="text" class="form-control" th:field="*{name}"
+                           placeholder="" required="">
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Image</p>
+                <input type="file" class="form-control-file" th:field="*{image}" multiple>
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Price $</p>
+                <input type="number" required="" class="form-control" th:field="*{price}"
+                       placeholder="">
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Describe</p>
+                <textarea th:field="*{describe}" required="" class="form-control" rows="3"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">SAVE</button>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<div class="clear"></div>
+<br>
+<br>
+<footer th:replace="layout-footer::footer"></footer>
+
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function addToCart(id) {
+        $.ajax(`${apiBaseUrl}/addtocart/${id}`)
+            .done(function (result) {
+                document.getElementById('cart').innerHTML = "CART(" + result + ")";
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+</script>
+</body>
+</html>

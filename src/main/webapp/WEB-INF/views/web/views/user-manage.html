@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dev Cold Shop</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <link href='../properties/images/favicon.png' rel="shortcut icon" type='image/png'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="../properties/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../properties/js/jquery1.min.js"></script>
+    <!-- start menu -->
+    <link href="../properties/css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="../properties/js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <script src="../properties/js/jquery.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
+    <!-- dropdown -->
+    <script src="../properties/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet"
+          href="../properties/FormSignInUp/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+
+    <!-- Main css -->
+    <link href="../properties/css/form.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <link rel="stylesheet" href="../properties/css/fwslider.css" media="all">
+    <script src="../properties/js/jquery-ui.min.js"></script>
+    <script src="../properties/js/css3-mediaqueries.js"></script>
+    <script src="../properties/js/fwslider.js"></script>
+    <link rel="stylesheet" href="../properties/FormSignInUp/css/styleLogin.css">
+    <link rel="stylesheet" href="../properties/css/etalage.css">
+    <script src="../properties/js/jquery.etalage.min.js"></script>
+    <script type="text/javascript" id="sourcecode">
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 360,
+                thumb_image_height: 360,
+                source_image_width: 900,
+                source_image_height: 900,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+        /* Popup Box */
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 8888; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10vh auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%; /* Could be more or less, depending on screen size */
+        }
+
+        @media (min-width: 1366px) {
+            .modal-content {
+                background-color: #fefefe;
+                margin: 10vh auto; /* 15% from the top and centered */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 30%; /* Could be more or less, depending on screen size */
+            }
+        }
+
+        h2, p {
+            margin: 0 0 20px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        span {
+            color: #666;
+            display: block;
+            padding: 0 0 5px;
+        }
+
+
+        input, textarea {
+            width: calc(100% - 18px);
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #1c87c9;
+            outline: none;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #1c87c9;
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #2371a0;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button.button {
+            background: none;
+            border-top: none;
+            outline: none;
+            border-right: none;
+            border-left: none;
+            border-bottom: #02274a 1px solid;
+            padding: 0 0 3px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button.button:hover {
+            border-bottom: #a99567 1px solid;
+            color: #a99567;
+        }
+    </style>
+
+</head>
+<body>
+
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<br>
+<br>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <p th:text="${message}"></p>
+                <div class="col-sm-8"><h2>Accounts <b>Details</b></h2></div>
+<!--                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error name</p>-->
+<!--                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error pass</p>-->
+                <spanp th:text="${messageRePass}"></spanp>
+                <br>
+                <br>
+                <div class="col-sm-4">
+                    <button type="button" class="button" data-modal="modalOne"><i class="fa fa-plus"></i> Add New</button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 80px">ID</th>
+                <th style="width: 100px">Name</th>
+                <th style="width: 300px">Email</th>
+                <th style="width: 100px">Role</th>
+                <th style="width: 50px;">Action</th>
+            </tr>
+            </thead>
+            <tbody th:each="account :${users}">
+            <tr>
+                <td th:text="${account.id}"></td>
+                <td th:text="${account.getUsername()}"></td>
+                <td th:text="${account.getEmail()}"></td>
+                <td th:switch="${account.getRole().getId()}">
+                    <span th:case="1">User</span>
+                    <span th:case="2">Admin</span>
+                </td>
+                <td>
+<!--                    <a class="button edit" data-modal="modalTwo" ><i class="material-icons">&#xE254;</i></a>-->
+                    <a class="delete" title="Delete" th:name="${account.getUsername()}" onclick="deleteAccount(this.name)"><i class="material-icons">&#xE872;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--<p>-->
+<!--    <button class="button" data-modal="modalOne">Contact Us</button>-->
+<!--</p>-->
+<div id="modalOne" class="modal">
+    <div class="modal-content">
+        <div class="contact-form">
+            <a class="close">&times;</a>
+            <form action="/admin/add-user" th:object="${account}" method="post">
+<!--                <p th:text="${message}"></p>-->
+                <h2>ADD USER</h2>
+<!--                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error name</p>-->
+<!--                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error pass</p>-->
+                <div>
+                    <input class="fname" type="text" name="username" placeholder="username" required="">
+                    <input type="text" name="email" placeholder="Email" required="">
+                    <p>ROLE</p>
+                    <select name="role-user">
+                        <option value="USER" selected="selected">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <br>
+                    <br>
+                    <input type="password" name="password" placeholder="Password" required="">
+                    <input type="password" name="repassword" placeholder="Password Again" required="">
+<!--                    <p th:text="${messageRePass}"></p>-->
+                </div>
+                <button type="submit" >ADD</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div id="modalTwo" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <div class="contact-form">-->
+<!--            <span class="close">&times;</span>-->
+<!--            <form th:action="@{'/admin/edit-user/'+${}" th:object="${user}" method="post">-->
+<!--                <p th:text="${message}"></p>-->
+<!--                <h2>EDIT USER</h2>-->
+<!--                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error name</p>-->
+<!--                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error pass</p>-->
+<!--                <div>-->
+<!--                    <input class="fname" type="text" name="name" >-->
+<!--                    <input type="text" name="email" >-->
+<!--                    <p>ROLE</p>-->
+<!--                    <select id="role" name="role-user">-->
+<!--                        <option value="USER">USER</option>-->
+<!--                        <option value="ADMIN">ADMIN</option>-->
+<!--                    </select>-->
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                    <input type="password" name="password" >-->
+<!--                    <input type="text" name="repassword" placeholder="Password Again">-->
+<!--                    <p th:text="${messageRePass}"></p>-->
+<!--                </div>-->
+<!--                <button type="submit">SAVE</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>  &lt;!&ndash;edit account&ndash;&gt;-->
+<footer th:replace="layout-footer::footer"></footer>
+<script>
+    var modalBtns = [...document.querySelectorAll(".button")];
+    modalBtns.forEach(function (btn) {
+        btn.onclick = function () {
+            var modal = btn.getAttribute('data-modal');
+            document.getElementById(modal).style.display = "block";
+        }
+    });
+
+    var closeBtns = [...document.querySelectorAll(".close")];
+    closeBtns.forEach(function (btn) {
+        btn.onclick = function () {
+            var modal = btn.closest('.modal');
+            modal.style.display = "none";
+        }
+    });
+
+    window.onclick = function (event) {
+        if (event.target.className === "modal") {
+            event.target.style.display = "none";
+        }
+    }
+
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function deleteAccount(name) {
+        if (confirm("Are you sure to delete this account?")) {
+            {
+                $.ajax(`${apiBaseUrl}/admin/delete-account/${name}`)
+                    .done(function (result) {
+                        window.location.reload(); // then reload the page.(3)
+                    })
+                    .fail(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    };
+
+    function search_product() {
+        let keySearch = document.getElementById("search").value;
+        console.log(keySearch)
+        $.ajax(`${apiBaseUrl}/search/` + keySearch)
+            .done(function (result) {
+                console.log(result)
+                $("#search").autocomplete({
+                    source: result
+                });
+
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    };
+</script>
+
+</body>
+</html>

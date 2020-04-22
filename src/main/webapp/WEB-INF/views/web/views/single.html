@@ -1,0 +1,222 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="layout-footer::head"></head>-->
+
+<head>
+    <title>Free Leoshop Website Template | Single:: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="../properties/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../properties/css/form.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script src="../properties/js/jquery1.min.js"></script>
+    <!-- start menu -->
+    <link href="../properties/css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="../properties/js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <script type="text/javascript" src="../properties/js/jquery.jscrollpane.min.js"></script>
+    <script src="../properties/js/jquery.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script type="text/javascript" id="sourcecode">
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+    </script>
+    <!-- start details -->
+    <script src="../properties/js/slides.min.jquery.js"></script>
+    <script>
+        $(function () {
+            $('#products').slides({
+                preload: true,
+                preloadImage: 'img/loading.gif',
+                effect: 'slide, fade',
+                crossfade: true,
+                slideSpeed: 350,
+                fadeSpeed: 500,
+                generateNextPrev: true,
+                generatePagination: false
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="../properties/css/etalage.css">
+    <script src="../properties/js/jquery.etalage.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 360,
+                thumb_image_height: 360,
+                source_image_width: 900,
+                source_image_height: 900,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<div class="mens">
+    <div class="main">
+        <div class="wrap">
+            <ul class="breadcrumb breadcrumb__t"><a class="home" href="/">Home</a> / <a href="#">Dolor sit amet</a> / <p
+                    th:text="${product.getName()}"></p></ul>
+            <div class="cont span_2_of_3">
+                <div class="grid images_3_of_2">
+                    <ul id="etalage">
+                        <li>
+                            <a href="optionallink.html">
+                                <img class="etalage_thumb_image img-responsive" th:src="${product.getImage()}"/>
+                                <img class="etalage_source_image img-responsive" th:src="${product.getImage()}"
+                                     title=""/>
+                            </a>
+                        </li>
+                        <li>
+                            <img class="etalage_thumb_image img-responsive" th:src="${product.getImage()}"/>
+                            <img class="etalage_source_image img-responsive" th:src="${product.getImage()}" title=""/>
+                        </li>
+                        <li>
+                            <img class="etalage_thumb_image img-responsive" th:src="${product.getImage()}"/>
+                            <img class="etalage_source_image img-responsive" th:src="${product.getImage()}"/>
+                        </li>
+                        <li>
+                            <img class="etalage_thumb_image img-responsive" th:src="${product.getImage()}"/>
+                            <img class="etalage_source_image img-responsive" th:src="${product.getImage()}"/>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="desc1 span_3_of_2">
+                    <h3 class="m_3" th:text="${product.getName()}"></h3>
+                    <span class="reducedfrom">Rs. 999</span>
+                    <p class="m_5" th:text="${product.getPrice()}+'$'"></p>
+                    <div>
+                            <button type="button" class="btn btn-success" onclick="addToCart(this.name)" th:name="${product.id}"  title="ADD TO CART">BUY</button>
+                    </div>
+                    <p class="m_text2" th:text="${product.getDescribetion()}"></p>
+                </div>
+                <div class="clear"></div>
+                <div class="toogle">
+                    <h3 class="m_3" style="color: #CB3D27">Product Details</h3>
+                    <p class="m_text" th:text="${product.getDescribetion()}"></p>
+                </div>
+                <div class="toogle">
+                    <h3 class="m_3" style="color: #00AEFF">More Information</h3>
+                    <p class="m_text">Sản phẩm đang trong quá trình hoàn thiện </p>
+                </div>
+            </div>
+            <div class="rsingle span_1_of_single">
+                <h5 class="m_1">Categories</h5>
+                <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
+                    <option value="1">Mens</option>
+                    <option value="2">Sub Category1</option>
+                    <option value="3">Sub Category2</option>
+                    <option value="4">Sub Category3</option>
+                </select>
+                <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
+                    <option value="1">Womens</option>
+                    <option value="2">Sub Category1</option>
+                    <option value="3">Sub Category2</option>
+                    <option value="4">Sub Category3</option>
+                </select>
+                <ul class="kids">
+                    <li><a href="#">Kids</a></li>
+                    <li class="last"><a href="#">Glasses Shop</a></li>
+                </ul>
+                <section class="sky-form">
+                    <h4>Price</h4>
+                    <div class="row row1 scroll-pane">
+                        <div class="col col-4">
+                            <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Rs 500 - Rs
+                                700</label>
+                        </div>
+                        <div class="col col-4">
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 700 - Rs
+                                1000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 1000 - Rs
+                                1500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 1500 - Rs
+                                2000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 2000 - Rs
+                                2500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 2500 - Rs
+                                3000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 3500 - Rs
+                                4000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 4000 - Rs
+                                4500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 4500 - Rs
+                                5000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 5000 - Rs
+                                5500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 5500 - Rs
+                                6000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 6000 - Rs
+                                6500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 6500 - Rs
+                                7000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 7000 - Rs
+                                7500</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 7500 - Rs
+                                8000</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 8000 - Rs
+                                8500</label>
+                        </div>
+                    </div>
+                </section>
+                <section class="sky-form">
+                    <h4>Colors</h4>
+                    <ul class="color-list">
+                        <li><a href="#"> <span class="color1"> </span>
+                            <p class="red">Red</p></a></li>
+                        <li><a href="#"> <span class="color2"> </span>
+                            <p class="red">Green</p></a></li>
+                        <li><a href="#"> <span class="color3"> </span>
+                            <p class="red">Blue</p></a></li>
+                        <li><a href="#"> <span class="color4"> </span>
+                            <p class="red">Yellow</p></a></li>
+                        <li><a href="#"> <span class="color5"> </span>
+                            <p class="red">Violet</p></a></li>
+                        <li><a href="#"> <span class="color6"> </span>
+                            <p class="red">Orange</p></a></li>
+                        <li><a href="#"> <span class="color7"> </span>
+                            <p class="red">Gray</p></a></li>
+                    </ul>
+                </section>
+                <script src="../properties/js/jquery.easydropdown.js"></script>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<footer th:replace="layout-footer::footer"></footer>
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function addToCart(id) {
+        $.ajax(`${apiBaseUrl}/addtocart/${id}`)
+            .done(function (result) {
+                document.getElementById('cart').innerHTML = "CART(" + result + ")";
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+</script>
+</body>
+</html>

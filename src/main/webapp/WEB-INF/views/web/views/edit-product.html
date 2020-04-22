@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:replace="layout-footer::head"></head>
+<body>
+
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<br>
+<br>
+<br>
+<!-- start slider -->
+<div style="background-color: #87D8EB">
+    <div class="wrap">
+        <h3>Edit Product</h3>
+        <p th:text="${message}"></p><br>
+        <form th:action="@{'/admin/edit-product/'+${product.id}}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <p style="color: #ff5d56">Name product
+                </p>
+                <input type="text" class="form-control"
+                       th:value="${product.getName()}" name="name" required="">
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Image</p>
+                <input type="file" class="form-control-file" multiple name="image">
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Price $</p>
+                <input type="number" class="form-control"
+                       th:value="${product.getPrice()}" name="price" required="">
+            </div>
+            <div class="form-group">
+                <p style="color: #ff5d56">Describe</p>
+                <textarea class="form-control" rows="3" th:text="${product.getDescribetion()}"
+                          name="describe" required=""></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">SAVE</button>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<div class="clear"></div>
+<br>
+<br>
+<footer th:replace="layout-footer::footer"></footer>
+
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+
+</script>
+</body>
+</html>

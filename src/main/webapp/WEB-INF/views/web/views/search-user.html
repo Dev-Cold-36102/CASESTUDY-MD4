@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:replace="layout-footer::head"></head>
+<body>
+
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<div class="clear"></div>
+<div class="wrap">
+    <h2 class="head">Featured Products</h2>
+    <div class="top-box">
+        <div class="col_1_of_3 span_1_of_3" th:each="product,iterStat :${products}">
+
+            <div class="inner_content clearfix">
+                <div class="product_image">
+                    <a th:href="@{'/product-detail/' + ${product.id}}">
+                        <img th:src="${product.getImage()}" th:title="${product.getName()}"/>
+                    </a>
+                </div>
+                <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                <div class="price">
+                    <div class="cart-left">
+                        <p class="title" th:text="${product.getName()}"></p>
+                        <div class="price1">
+                            <span class="actual" th:text="${product.getPrice()}"></span>
+                            <span class="actual">$</span>
+                        </div>
+                    </div>
+                    <a class="cart-right" onclick="addToCart(this.id)" th:id="${product.getId()}"></a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <span th:each="page,iterstar:${numberPage}">
+            <a th:href="@{'/search-page/'+${iterstar.index}}">
+                <button type="button" class="btn btn-primary btn-sm" ><span th:text="'PAGE'+${iterstar.index+1}"></span> </button>
+            </a>
+        </span>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
+<div class="clear"></div>
+<footer th:replace="layout-footer::footer"></footer>
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function addToCart(id) {
+        $.ajax(`${apiBaseUrl}/addtocart/${id}`)
+            .done(function (result) {
+                // console.log(result)
+                // console.log(result.data())
+                // console.log(result.amountOfCart)
+                document.getElementById('cart').innerHTML = "CART(" + result + ")";
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="layout-footer::head">-->
+<head>
+    <title>Free Leoshop Website Template | Checkout :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href='../properties/images/favicon.png' rel="shortcut icon" type='image/png'/>
+    <link href="../properties/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../properties/js/jquery1.min.js"></script>
+    <!-- start menu -->
+    <link href="../properties/css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="../properties/js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <!-- dropdown -->
+    <script src="../properties/js/jquery.easydropdown.js"></script>
+    <script src="../properties/js/jquery.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"-->
+    <!--            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+    <!--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <script src="../properties/js/jquery.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--    <link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <script>
+        // const apiBaseUrl = 'http://localhost:8080';
+
+        function search_product() {
+            let keySearch = document.getElementById("search").value;
+            console.log(keySearch)
+            $.ajax(`${apiBaseUrl}/search/` + keySearch)
+                .done(function (result) {
+                    console.log(result)
+                    $("#search").autocomplete({
+                        source: result
+                    });
+
+                })
+                .fail(function (error) {
+                    console.log(error);
+                });
+        };
+
+    </script>
+
+
+    <style>
+        .img-size {
+            width: 100px;
+            height: 60px;
+        }
+    </style>
+
+</head>
+</head>
+<body>
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+<div class="register_account">
+    <div class="wrap">
+        <p th:if="${amountCart==0}" class="cart">You have no items in your shopping cart.</p>
+        <p id="amount-cart" th:if="${amountCart!=0}" class="cart" style="color: red"
+           th:text="'You have ' + ${amountCart} + ' items in your shopping cart.'"></p>
+        <p><br>Click<a href="/"> here</a> to continue shopping</p>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div th:if="${amountCart!=0}" id="content">
+    <div class="container">
+        <p style="color: #0AA5E2" id="totalBill" th:text="'Total bill : '+${totalBill}+' $'"></p>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                <th scope="col">Remove</th>
+            </tr>
+            </thead>
+            <tbody th:each="product,istart :${listProduct}">
+            <tr th:id="'row-'+${product.getId()}">
+                <td><p th:text="${product.getName()}"></p></td>
+                <td><a th:href="@{'/product-detail/'+ ${product.getId()}}"><img class="rounded img-size"
+                                                                                th:src="${product.getImage()}"></a>
+                </td>
+                <td><input th:id="'amount-product'+${product.getId()}" class="text-center" type="number" max="10"
+                           min="1"
+                           style="width: 100px" th:value="${product.getAmount()}" th:name="${product.id}"
+                           oninput="changeAmount(this.name)">
+                </td>
+                <td><p th:text="${product.getPrice()}"></p>
+                </td>
+                <td><p th:id="'total-product'+${product.getId()}"
+                       th:text="${product.getPrice()*product.getAmount()}+'$'"></p>
+                    <input type="hidden" th:id="'total-product-hidden'+${product.id}"
+                           th:value="${product.getPrice()*product.getAmount()}"></td>
+
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="remove(this.name)" th:name="${product.id}">X
+                    </button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <input type="hidden" id="total-bill-hidden" th:value="${totalBill}">
+    </div>
+
+    <div class="clear"></div>
+    <br>
+
+    <form action="/payment">
+        <div class="container form-group">
+            <p class="text-center">CUSTOMER INFORMATION</p>
+            <p>Full name</p>
+            <div class="input-group flex-nowrap form-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">*</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Full Name" required=""
+                       aria-describedby="addon-wrapping">
+            </div>
+            <p>Phone</p>
+            <div class="input-group flex-nowrap form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">*</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Phone" required=""
+                       aria-describedby="addon-wrapping">
+            </div>
+            <p>Address</p>
+            <div class="input-group flex-nowrap form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">*</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Address" required=""
+                       aria-describedby="addon-wrapping">
+            </div>
+            <p>Note (if you have any note)</p>
+            <div class="input-group flex-nowrap form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">*</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Note"
+                       aria-describedby="addon-wrapping">
+            </div>
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Pay</button>
+            </div>
+        </div>
+
+
+    </form>
+    <div class="clear"></div>
+
+    <br><br>
+</div>
+<footer th:replace="layout-footer::footer"></footer>
+
+<script>
+    const apiBaseUrl = 'http://localhost:8080';
+
+    function changeAmount(id) {
+        let amountAfter = document.getElementById("amount-product" + id).value;
+        let totalBill = document.getElementById("total-bill-hidden").value;
+        let totalProductBefore = document.getElementById("total-product-hidden" + id).value;
+        if (amountAfter > 10) {
+            document.getElementById("amount-product" + id).value = 10;
+            amountAfter = 10;
+        }
+        if (amountAfter < 1) {
+            document.getElementById("amount-product" + id).value = 1;
+            amountAfter = 1;
+        }
+        $.ajax(`${apiBaseUrl}/change-amount-product/` + id + `/` + amountAfter)
+            .done(function (result) {
+                totalBill -= totalProductBefore;
+                totalBill += result;
+                document.getElementById("total-product" + id).innerHTML = result + "$";
+                document.getElementById("totalBill").innerHTML = "Total bill : " + totalBill + "$";
+                document.getElementById("total-bill-hidden").value = totalBill;
+                document.getElementById("total-product-hidden" + id).value = result;
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+    function remove(id) {
+        $.ajax(`${apiBaseUrl}/remove/` + id)
+            .done(function (result) {
+                // console.log(result.amountOfCart)
+                let totalBill = document.getElementById("total-bill-hidden").value;
+                let totalProductBefore = document.getElementById("total-product-hidden" + id).value;
+                totalBill -= totalProductBefore;
+                document.getElementById("totalBill").innerHTML = "Total bill : " + totalBill + "$";
+                document.getElementById("total-bill-hidden").value = totalBill;
+
+                $(`#row-` + id).hide();
+                if (result == 0) {
+                    $('#content').hide();
+                }
+                document.getElementById('cart').innerHTML = "CART(" + result + ")";
+                document.getElementById('amount-cart').innerHTML = "You have " + result + " items in your shopping cart.";
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    }
+
+
+</script>
+</body>
+</html>

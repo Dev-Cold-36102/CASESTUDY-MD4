@@ -1,0 +1,22 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity4">
+<head th:replace="layout-footer::head"></head>
+<body>
+<div th:insert="layout-footer::nav"></div>
+<div th:insert="layout-footer::menu"></div>
+
+day laf tai khoan cua
+<span sec:authentication="principal.username"></span>
+<p th:text="'id= '+${id}"></p>
+
+<script src="../properties/js/jquery.easydropdown.js"></script>
+<footer th:replace="layout-footer::footer"></footer>
+</body>
+</html>
